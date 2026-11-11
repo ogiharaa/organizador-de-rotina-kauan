@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrono Matrix - Organizador 3D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fundo com formas 3D voadoras -->
+  <div class="bg-3d-container">
+    <div class="shape-3d shape-1"></div>
+    <div class="shape-3d shape-2"></div>
+    <div class="shape-3d shape-3"></div>
+    <div class="shape-3d shape-4"></div>
+  </div>
+
+  <header>
+    <h1 class="title-gradient">Chrono Matrix</h1>
+    <p class="subtitle">Gerencie suas rotinas em uma nova dimensão</p>
+  </header>
+
+  <main class="container">
+    <div class="cards-grid">
+      
+      <!-- Card Estudo -->
+      <div class="card">
+        <div class="card-icon">📚</div>
+        <h3>Estudos</h3>
+        <p>Foco total, aprendizado de linguagens, leitura e cursos.</p>
+        <div class="btn-group">
+          <button class="btn btn-modal" onclick="openModal('estudo')">Detalhes</button>
+          <a href="estudo.html" class="btn btn-link">Acessar</a>
+        </div>
+      </div>
+
+      <!-- Card Trabalho -->
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <h3>Trabalho</h3>
+        <p>Reuniões, projetos, entregas e organização diária.</p>
+        <div class="btn-group">
+          <button class="btn btn-modal" onclick="openModal('trabalho')">Detalhes</button>
+          <a href="trabalho.html" class="btn btn-link">Acessar</a>
+        </div>
+      </div>
+
+      <!-- Card Videogame -->
+      <div class="card">
+        <div class="card-icon">🎮</div>
+        <h3>Videogame</h3>
+        <p>Lazer, gameplays de RPG, campeonatos e relaxamento.</p>
+        <div class="btn-group">
+          <button class="btn btn-modal" onclick="openModal('videogame')">Detalhes</button>
+          <a href="videogame.html" class="btn btn-link">Acessar</a>
+        </div>
+      </div>
+
+      <!-- Card Academia -->
+      <div class="card">
+        <div class="card-icon">🏋️‍♂️</div>
+        <h3>Academia</h3>
+        <p>Treino de força, cardio, hipertrofia e saúde física.</p>
+        <div class="btn-group">
+          <button class="btn btn-modal" onclick="openModal('academia')">Detalhes</button>
+          <a href="academia.html" class="btn btn-link">Acessar</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Estrutura do Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="modal-body" id="modalBody">
+        <!-- Conteúdo preenchido via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Embutido -->
+  <script>
+    const routinesData = {
+      estudo: {
+        title: "Rotina de Estudos",
+        meta: "Meta: 3 Horas / dia",
+        tasks: ["08:00 - Revisão de código / Leitura", "14:00 - Cursos e Prática de Projetos", "20:00 - Leitura de Livros Técnicos"]
+      },
+      trabalho: {
+        title: "Rotina de Trabalho",
+        meta: "Meta: 8 Horas / dia",
+        tasks: ["09:00 - Daily Meeting & E-mails", "10:00 - Foco em Tasks Principais", "16:00 - Code Review & Alinhamentos"]
+      },
+      videogame: {
+        title: "Rotina de Jogos",
+        meta: "Meta: 2 Horas / dia",
+        tasks: ["21:00 - Sessão de RPG / Multiplayer", "22:30 - Jogos Casuais & Lives"]
+      },
+      academia: {
+        title: "Rotina de Academia",
+        meta: "Meta: 1.5 Horas / dia",
+        tasks: ["06:30 - Aquecimento e Mobilidade", "07:00 - Treino de Musculação", "07:45 - Cardio 20 Minutos"]
+      }
+    };
+
+    function openModal(type) {
+      const overlay = document.getElementById('modalOverlay');
+      const body = document.getElementById('modalBody');
+      const data = routinesData[type];
+
+      let tasksHTML = data.tasks.map(t => `<li>📍 ${t}</li>`).join('');
+
+      body.innerHTML = `
+        <h2>${data.title}</h2>
+        <p><strong>${data.meta}</strong></p>
+        <ul>${tasksHTML}</ul>
+      `;
+
+      overlay.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Fechar ao clicar fora da caixa do modal
+    window.onclick = function(event) {
+      const overlay = document.getElementById('modalOverlay');
+      if (event.target === overlay) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
